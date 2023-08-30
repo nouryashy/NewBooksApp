@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.data.entity.BookEntity
+import com.example.domain.feature.books.model.Book
 import kotlinx.coroutines.flow.Flow
 
 
