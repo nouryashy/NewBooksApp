@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/booksFragment"
+        android:title="Books"
+        android:icon="@drawable/ic_menu_home_orange"/>
+    <item android:id="@+id/categoryFragment"
+        android:title="Category"
+        android:icon="@drawable/ic_grid_gray"/>
+    <item android:id="@+id/authorsFragment"
+        android:title="Authors"
+        android:icon="@drawable/ic_menu_profile_gray"/>
+
+
+</menu>
