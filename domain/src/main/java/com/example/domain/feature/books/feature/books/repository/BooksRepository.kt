@@ -8,8 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface BooksRepository {
 
-//        suspend fun getBooks(page: Int): List<Book>
-    suspend fun getBooks(page: Int): BooksResponce
+    suspend fun getBooks(page: Int): List<Book>
 
 
 

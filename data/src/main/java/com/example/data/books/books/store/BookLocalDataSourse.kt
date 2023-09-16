@@ -5,11 +5,15 @@ import com.example.data.books.books.cashe.entity.BookEntity
 
 class BookLocalDataSourse(val bookDao: BooksDao) {
 
-     fun getBookFromDB(): List<BookEntity> {
+    suspend  fun getBookFromDB(): List<BookEntity> {
         return bookDao.getAllBooks()
     }
 
-     fun saveBooksToDb(books: List<BookEntity>) {
+    suspend  fun saveBooksToDb(books: List<BookEntity>) {
         bookDao.insertBooks(books)
+    }
+
+    suspend  fun deleteBooks(){
+        return bookDao.clearBooks()
     }
 }

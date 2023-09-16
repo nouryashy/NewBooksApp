@@ -16,6 +16,7 @@ object UseCaseModule {
     fun provideBookUseCase(booksRepository: BooksRepository): GetBooks {
         return GetBooks(booksRepository)
     }
+
     @Provides
     fun provideAuthorUseCase(authorRepository: AuthorRepository): GetAuthors {
         return GetAuthors(authorRepository)

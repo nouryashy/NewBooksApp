@@ -7,9 +7,15 @@ import retrofit2.http.Query
 
 
 interface BooksServices {
+//    @GET("books")
+//    suspend fun getBooks(@Query("page") page: Int)
+//    : BooksResponce
+
+
     @GET("books")
     suspend fun getBooks(@Query("page") page: Int)
-    : BooksResponce
+            : BooksResponce
+
 
 
 

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.feature.books.feature.books.model.Book
 import com.example.newbooksapp.databinding.FragmentBooksBinding
+import com.example.postsappdemo.state.Resource
 
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -42,24 +43,9 @@ class BooksFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = booksAdapter
         }
-//        viewModel.getBooks()
-//        observeBooksState()
-//        setRecyOnScrollListner()
-
-
-        observeBooks()
-        viewModel.loadNextPage()
+        viewModel.loadBooks()
+        observeBooksState()
         setRecyOnScrollListner()
-
-    }
-
-    private fun observeBooks() {
-        lifecycleScope.launch {
-            viewModel.books.collect {
-                booksAdapter!!.submitList(it)
-
-            }
-        }
     }
 
     private fun setRecyOnScrollListner() {
@@ -69,19 +55,11 @@ class BooksFragment : Fragment() {
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                 val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
                 val totalItemCount = layoutManager.itemCount
-
                 if (lastVisibleItemPosition + 1 == totalItemCount) {
-                    // User reached the end of the list, load more data
-
                     viewModel.loadNextPage()
-
-
                 }
             }
-
-
         })
-
     }
 
 
@@ -98,49 +76,45 @@ class BooksFragment : Fragment() {
 
         }
     }
-}
 
 
 
+private fun observeBooksState() {
+    lifecycleScope.launch {
+        viewModel.books.collect { result ->
+            when (result) {
 
+                is Resource.Success -> {
+                    val books = result.data
+                    // Update RecyclerView with the list of books
+                    fgBinding.apply {
+                        progressBar.visibility = View.GONE
+                        booksRv.visibility = View.VISIBLE
+                        tvError.visibility = View.GONE
+                    }
+                    booksAdapter!!.submitList(books)
+                }
 
-//    private fun observeBooksState() {
-//        lifecycleScope.launch {
-//            viewModel.books.collect { result ->
-//                when (result) {
-//
-//                    is Resource.Success -> {
-//                        val books = result.data
-//                        // Update RecyclerView with the list of books
-//                        fgBinding.apply {
-//                            progressBar.visibility = View.GONE
-//                            booksRv.visibility = View.VISIBLE
-//                            tvError.visibility = View.GONE
-//                        }
-//                        booksAdapter!!.submitList(books)
-//                    }
-//
-//                    is Resource.Loading -> {
-//                        // Show loading UI
-//                        fgBinding.apply {
-//                            progressBar.visibility = View.VISIBLE
-//                            booksRv.visibility = View.GONE
-//                            tvError.visibility = View.GONE
-//                        }
-//                    }
-//
-//                    is Resource.Error -> {
-//                        val error = result.exception
-//                        // Show error UI
-//                        fgBinding.tvError.visibility = View.VISIBLE
-//                    }
-//
-//                    else -> {}
-//                }
-//            }
-//        }
-//    }
-//
+                is Resource.Loading -> {
+                    // Show loading UI
+                    fgBinding.apply {
+                        progressBar.visibility = View.VISIBLE
+                        booksRv.visibility = View.GONE
+                        tvError.visibility = View.GONE
+                    }
+                }
+
+                is Resource.Error -> {
+                    val error = result.exception
+                    // Show error UI
+                    fgBinding.tvError.visibility = View.VISIBLE
+                }
+
+                else -> {}
+            }
+        }
+    }
+}}
 
 
 

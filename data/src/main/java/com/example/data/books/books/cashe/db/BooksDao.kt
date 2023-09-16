@@ -10,10 +10,14 @@ import com.example.data.books.books.cashe.entity.BookEntity
 @Dao
 interface BooksDao {
     @Query("SELECT * FROM books")
-     fun getAllBooks(): List<BookEntity>
+    suspend  fun getAllBooks(): List<BookEntity>
 
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-     fun insertBooks(books: List<BookEntity>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend  fun insertBooks(books: List<BookEntity>)
+
+
+    @Query("DELETE FROM books")
+    suspend  fun clearBooks()
 }
 
