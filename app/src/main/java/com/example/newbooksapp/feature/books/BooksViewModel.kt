@@ -1,9 +1,7 @@
 package com.example.newbooksapp.feature.books
 
 import androidx.lifecycle.*
-import com.example.data.books.books.repository.BooksRepositoryImp
 import com.example.domain.feature.books.feature.books.model.Book
-import com.example.domain.feature.books.feature.books.repository.BooksRepository
 import com.example.domain.feature.books.feature.books.usecase.GetBooks
 import com.example.postsappdemo.state.Resource
 

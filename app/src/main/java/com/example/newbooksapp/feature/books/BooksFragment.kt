@@ -86,7 +86,6 @@ private fun observeBooksState() {
 
                 is Resource.Success -> {
                     val books = result.data
-                    // Update RecyclerView with the list of books
                     fgBinding.apply {
                         progressBar.visibility = View.GONE
                         booksRv.visibility = View.VISIBLE

@@ -4,7 +4,6 @@ import com.example.data.books.books.cashe.mapper.BookMapper
 import com.example.data.books.books.store.BookLocalDataSourse
 import com.example.data.books.books.store.BookNetworkDataSource
 import com.example.domain.feature.books.feature.books.model.Book
-import com.example.domain.feature.books.feature.books.model.BooksResponce
 import com.example.domain.feature.books.feature.books.repository.BooksRepository
 
 
@@ -15,11 +14,8 @@ class BooksRepositoryImp(
 
 ) : BooksRepository {
 
-
-    private var currentPage = 1
-
     override suspend fun getBooks(page: Int): List<Book> {
-//
+
 //        val networkBooks = networkDataSource.getBooksFromApi(page)
 //        val books = networkBooks.books
 //        return if (books.isNotEmpty()) {
@@ -40,6 +36,9 @@ class BooksRepositoryImp(
             val books = networkBooks.books
             localDataSource.saveBooksToDb(books.map { mapper.mapDomainToEntity(it) })
             return books
+
+
+
         }
 
     }
