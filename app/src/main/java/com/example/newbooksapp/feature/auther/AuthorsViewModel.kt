@@ -2,7 +2,7 @@ package com.example.newbooksapp.feature.auther
 
 import androidx.lifecycle.*
 import com.example.domain.feature.books.books.model.Authors
-import com.example.domain.feature.books.books.usecase.GetAuthors
+import com.example.domain.feature.books.feature.authors.usecase.GetAuthors
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*

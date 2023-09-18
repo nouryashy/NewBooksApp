@@ -1,7 +1,6 @@
-package com.example.domain.feature.books.books.usecase
+package com.example.domain.feature.books.feature.authors.usecase
 
 import com.example.domain.feature.books.books.repository.AuthorRepository
-import com.example.domain.feature.books.feature.books.repository.BooksRepository
 
 class GetAuthors(private val authorRepository: AuthorRepository) {
 

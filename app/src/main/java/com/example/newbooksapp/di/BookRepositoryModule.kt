@@ -1,12 +1,12 @@
 package com.example.postsappdemo.di
 
 
-import com.example.data.books.books.cashe.mapper.BookMapper
-import com.example.data.books.books.store.BookLocalDataSourse
-import com.example.data.books.books.store.BookNetworkDataSource
-import com.example.data.books.books.cashe.db.BooksDao
-import com.example.data.books.books.remote.BooksServices
-import com.example.data.books.books.repository.BooksRepositoryImp
+import com.example.data.data.books.cashe.mapper.BookMapper
+import com.example.data.data.books.store.BookLocalDataSourse
+import com.example.data.data.books.store.BookNetworkDataSource
+import com.example.data.data.books.cashe.db.BooksDao
+import com.example.data.data.books.remote.BooksServices
+import com.example.data.data.books.repository.BooksRepositoryImp
 import com.example.domain.feature.books.feature.books.repository.BooksRepository
 import dagger.Module
 import dagger.Provides

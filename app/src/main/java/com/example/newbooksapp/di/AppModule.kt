@@ -2,10 +2,10 @@ package com.example.postsappdemo.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.data.books.books.cashe.db.BooksDao
-import com.example.data.books.books.cashe.db.BooksDatabase
-import com.example.data.books.books.remote.BooksServices
-import com.example.data.bookss.books.remote.AuthorsServices
+import com.example.data.data.books.cashe.db.BooksDao
+import com.example.data.data.books.cashe.db.BooksDatabase
+import com.example.data.data.books.remote.BooksServices
+import com.example.data.bookss.books.remote.CategoryServices
 import com.example.postsappdemo.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -46,8 +46,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAuthorApiService(retrofit: Retrofit): AuthorsServices {
-        return retrofit.create(AuthorsServices::class.java)
+    fun provideAuthorApiService(retrofit: Retrofit): CategoryServices {
+        return retrofit.create(CategoryServices::class.java)
     }
 
 

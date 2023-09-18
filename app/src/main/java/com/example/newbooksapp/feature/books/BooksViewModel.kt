@@ -12,12 +12,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BooksViewModel @Inject constructor(
-    private val getBooksUseCase: GetBooks
+    private val getBooksUseCase: GetBooks,
+
 ) :
     ViewModel() {
     private var _books = MutableStateFlow<Resource<List<Book>>>(Resource.Loading)
     val books: StateFlow<Resource<List<Book>>> = _books
-
 
     var currentPage = 1
     fun loadBooks() {
@@ -32,6 +32,7 @@ class BooksViewModel @Inject constructor(
             }
         }
     }
+
 
     fun loadNextPage() {
         currentPage++

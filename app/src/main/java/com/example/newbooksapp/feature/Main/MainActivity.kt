@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         setupNav()
     }
 
-
     private fun setupNav() {
         val navController = findNavController(R.id.my_nav_host)
         mABinding.bottomNavigatinView.setupWithNavController(navController)
@@ -37,7 +36,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.categoryFragment -> showBottomNav()
             }
         }
-
     }
 
     private fun showBottomNav() {

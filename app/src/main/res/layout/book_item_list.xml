@@ -7,6 +7,7 @@
     android:layout_margin="8dp"
     android:padding="8dp"
     android:elevation="10dp"
+    app:cardElevation="@dimen/cardview_compat_inset_shadow"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout

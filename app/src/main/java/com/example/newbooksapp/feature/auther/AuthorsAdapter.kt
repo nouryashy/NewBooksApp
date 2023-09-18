@@ -11,7 +11,6 @@ import com.example.domain.feature.books.books.model.Authors
 import com.example.newbooksapp.databinding.AuthorItemListBinding
 
 
-
 class AuthorsAdapter(
 ) :
     androidx.recyclerview.widget.ListAdapter<Authors, AuthorsAdapter.ViewHolder>(
@@ -36,10 +35,10 @@ class AuthorsAdapter(
         fun bind(author: Authors) {
 
 
-            for(a in author.authors){
+            for (a in author.authors) {
                 itemBinding.authorNameTv.text = a.name
-                itemBinding.authorBirthDateTv.text = a.toString()
-                itemBinding.authorDeathDateTv.text = a.toString()
+                itemBinding.authorBirthDateTv.text = "birth year ${a.birth_year}"
+                itemBinding.authorDeathDateTv.text = "death year ${a.death_year}"
             }
 
         }
