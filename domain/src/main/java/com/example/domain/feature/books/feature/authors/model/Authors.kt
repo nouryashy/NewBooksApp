@@ -5,8 +5,9 @@ data class Authors(
 ){
     data class Author(
         val id: Int,
+        val name: String,
         val birth_year: Int,
-        val death_year: Int,
-        val name: String
+        val death_year: Int
+
     )
 }

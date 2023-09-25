@@ -2,10 +2,12 @@ package com.example.postsappdemo.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.data.data.books.cashe.db.BooksDao
-import com.example.data.data.books.cashe.db.BooksDatabase
-import com.example.data.data.books.remote.BooksServices
-import com.example.data.bookss.books.remote.CategoryServices
+import com.example.data.bookss.books.remote.AuthorsServices
+import com.example.data.data.books.cache.db.AuthorsDao
+import com.example.data.data.books.cache.db.AuthorsDatabase
+import com.example.data.data.books.cache.db.BooksDao
+import com.example.data.data.books.cache.db.BooksDatabase
+import com.example.data.data.books.remote.service.BooksServices
 import com.example.postsappdemo.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -46,14 +48,16 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAuthorApiService(retrofit: Retrofit): CategoryServices {
-        return retrofit.create(CategoryServices::class.java)
+    fun provideAuthorApiService(retrofit: Retrofit): AuthorsServices {
+        return retrofit.create(AuthorsServices::class.java)
     }
+
+
 
 
     @Provides
     @Singleton
-    fun provideDatabase(app: Application): BooksDatabase {
+    fun provideBookDatabase(app: Application): BooksDatabase {
         return Room.databaseBuilder(app, BooksDatabase::class.java, "books_database")
             .allowMainThreadQueries()
             .build()
@@ -62,8 +66,25 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDao(database: BooksDatabase): BooksDao {
+    fun provideAuthorDatabase(app: Application): AuthorsDatabase {
+        return Room.databaseBuilder(app, AuthorsDatabase::class.java, "authors_database")
+            .allowMainThreadQueries()
+            .build()
+    }
+
+
+
+    @Provides
+    @Singleton
+    fun provideBookDao(database: BooksDatabase): BooksDao {
         return database.BooksDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideAuthorDao(database: AuthorsDatabase): AuthorsDao {
+        return database.authorDao()
+    }
+
 
 }

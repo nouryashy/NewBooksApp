@@ -23,7 +23,6 @@ class BooksDetFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         fgDetBinding = FragmentBooksDetBinding.inflate(inflater, container, false)
         return fgDetBinding.root
     }

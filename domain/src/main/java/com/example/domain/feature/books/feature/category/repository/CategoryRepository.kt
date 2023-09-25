@@ -1,10 +1,6 @@
 package com.example.domain.feature.books.feature.category.repository
-
-import com.example.domain.feature.books.feature.books.model.Book
-import com.example.domain.feature.books.feature.category.model.Category
+import com.example.domain.feature.books.feature.category.model.CategoryLabel
 
 interface CategoryRepository {
-
-
-    suspend fun getCategory(): List<Category>
+     fun getCategoriesLabel(): List<CategoryLabel>
 }

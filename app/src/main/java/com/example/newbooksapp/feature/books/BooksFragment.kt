@@ -1,5 +1,8 @@
 package com.example.newbooksapp.feature.books
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +15,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.domain.feature.books.feature.books.model.Book
+import com.example.newbooksapp.R
+import com.example.newbooksapp.base.BaseAdapter
+import com.example.newbooksapp.databinding.BookItemListBinding
 import com.example.newbooksapp.databinding.FragmentBooksBinding
 import com.example.postsappdemo.state.Resource
 
@@ -21,12 +28,9 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class BooksFragment : Fragment() {
-
-    var booksAdapter: BooksAdapter? = null
-
+    private lateinit var booksAdapter: BaseAdapter<Book, BookItemListBinding>
     private lateinit var fgBinding: FragmentBooksBinding
     private val viewModel: BooksViewModel by viewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,17 +42,46 @@ class BooksFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        booksAdapter = BooksAdapter(onClicked)
+        setUpBookAdapter()
         fgBinding.booksRv.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = booksAdapter
         }
         viewModel.loadBooks()
         observeBooksState()
-        setRecyOnScrollListner()
+        setRecyclerOnScrollListner()
+
     }
 
-    private fun setRecyOnScrollListner() {
+    private fun setUpBookAdapter() {
+        booksAdapter = BaseAdapter(layoutInflater, BookItemListBinding::inflate) { binding, book ->
+            binding.booksNameTv.text = book.title
+            for (i in book.subjects) {
+                binding.booksDesTv.text = i
+            }
+            Glide.with(binding.root.context).load(book.formats.imageJPEG)
+                .into(binding.booksIv)
+        }
+        booksAdapter.setOnItemClickListener { book ->
+            val bookId = book.id
+            val bookTitle = book.title
+            val bookImg = book.formats.imageJPEG
+            var bookDet: String? = null
+            for (i in book.subjects) {
+                bookDet = i
+            }
+            val action = BooksFragmentDirections
+                .actionBooksFragmentToBooksDetFragment(
+                    bookId,
+                    bookTitle,
+                    bookImg,
+                    bookDet!!
+                )
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun setRecyclerOnScrollListner() {
         fgBinding.booksRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -56,64 +89,40 @@ class BooksFragment : Fragment() {
                 val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
                 val totalItemCount = layoutManager.itemCount
                 if (lastVisibleItemPosition + 1 == totalItemCount) {
+                    fgBinding.booksProgressBar.visibility = View.VISIBLE
                     viewModel.loadNextPage()
                 }
             }
         })
     }
-
-
-    private val onClicked = object : BooksAdapter.OnItemClickListener {
-        override fun onClicked(book: Book) {
-        val bookId = book.id
-        val bookTitle = book.title
-        val bookImg = book.formats.imageJPEG
-        val bookDet = book.subjects[0]
-        val action = BooksFragmentDirections.actionBooksFragmentToBooksDetFragment(
-            bookId, bookTitle, bookImg, bookDet
-        )
-        findNavController().navigate(action)
-
-        }
-    }
-
-
-
-private fun observeBooksState() {
-    lifecycleScope.launch {
-        viewModel.books.collect { result ->
-            when (result) {
-
-                is Resource.Success -> {
-                    val books = result.data
-                    fgBinding.apply {
-                        progressBar.visibility = View.GONE
-                        booksRv.visibility = View.VISIBLE
-                        tvError.visibility = View.GONE
+    private fun observeBooksState() {
+        lifecycleScope.launch {
+            viewModel.books.collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        val books = result.data
+                        fgBinding.apply {
+                            booksProgressBar.visibility = View.GONE
+                        }
+                        booksAdapter.setItems(books)
                     }
-                    booksAdapter!!.submitList(books)
-                }
-
-                is Resource.Loading -> {
-                    // Show loading UI
-                    fgBinding.apply {
-                        progressBar.visibility = View.VISIBLE
-                        booksRv.visibility = View.GONE
-                        tvError.visibility = View.GONE
+                    is Resource.Loading -> {
+                        fgBinding.apply {
+                            booksProgressBar.visibility = View.VISIBLE
+                        }
                     }
+                    is Resource.Error -> {
+                        val error = result.exception
+                        fgBinding.apply {
+                            booksProgressBar.visibility = View.GONE
+                        }
+                    }
+                    else -> {}
                 }
-
-                is Resource.Error -> {
-                    val error = result.exception
-                    // Show error UI
-                    fgBinding.tvError.visibility = View.VISIBLE
-                }
-
-                else -> {}
             }
         }
     }
-}}
+}
 
 
 

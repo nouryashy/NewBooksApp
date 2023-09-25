@@ -45,5 +45,21 @@
         android:id="@+id/categoryFragment"
         android:name="com.example.newbooksapp.feature.category.CategoryFragment"
         android:label="fragment_category"
-        tools:layout="@layout/fragment_category" />
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_categoryFragment_to_categoryDetFragment"
+            app:destination="@id/categoryDetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryDetFragment"
+        android:name="com.example.newbooksapp.feature.category.CategoryDetFragment"
+        android:label="fragment_category_det"
+        tools:layout="@layout/fragment_category_det" >
+        <argument
+            android:name="category_id"
+            app:argType="integer" />
+        <argument
+            android:name="category_Name"
+            app:argType="string" />
+    </fragment>
 </navigation>
