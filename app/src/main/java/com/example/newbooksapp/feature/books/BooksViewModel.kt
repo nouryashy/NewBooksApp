@@ -1,5 +1,7 @@
 package com.example.newbooksapp.feature.books
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.domain.feature.books.feature.books.model.Book
 import com.example.domain.feature.books.feature.books.usecase.GetBooks
@@ -23,6 +25,7 @@ class BooksViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val bookList = getBooksUseCase(currentPage)
+                Log.d(TAG, "loadBooks: $bookList")
                 _books.value = Resource.Success(bookList)
             } catch (e: Exception) {
                 _books.value = Resource.Error(e)

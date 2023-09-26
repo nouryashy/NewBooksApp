@@ -3,8 +3,6 @@ import com.example.data.data.books.remote.model.BookModel
 import com.example.domain.feature.books.feature.books.model.Book
 
 object BookResponseModelMapper {
-
-
     fun mapFromEntity(entity: BookModel): Book {
         val formatEntity = FormatModelMapper.mapFromEntity(entity.formats)
         return Book(

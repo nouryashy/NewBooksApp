@@ -1,5 +1,7 @@
 package com.example.data.data.books.data.repository
 
+import android.content.ContentValues
+import android.util.Log
 import com.example.data.data.books.cache.mapper.CachedBookMapper
 import com.example.data.data.books.data.store.BookLocalDataSource
 import com.example.data.data.books.data.store.BookNetworkDataSource
@@ -14,10 +16,6 @@ class BooksRepositoryImp(
     private val mapperCached: CachedBookMapper
 ) : BooksRepository {
     override suspend fun getBooks(page: Int): List<Book> {
-//        return fetchFromRemoteOrCache(page)
-//    }
-//
-//    private suspend fun fetchFromRemoteOrCache(page: Int): List<Book> {
         return try {
             val networkBooks = networkDataSource.getBooksFromApi(page)
             val books = networkBooks.books

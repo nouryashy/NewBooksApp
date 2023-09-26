@@ -1,5 +1,7 @@
 package com.example.data.bookss.books.repository
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import com.example.data.bookss.books.store.AuthorLocalDataSourse
 import com.example.data.bookss.books.store.AuthorNetworkDataSource
 import com.example.data.data.authors.remote.mapper.AuthorsResponseModelMapper
@@ -16,9 +18,6 @@ class AuthorsRepositoryImp(
 
     ) : AuthorRepository {
     override suspend fun getAuthors(): List<Authors> {
-        return fetchFromRemoteOrCache()
-    }
-    private suspend fun fetchFromRemoteOrCache(): List<Authors> {
         return try {
             val networkAuthors = networkDataSource.getAuthorsFromApi()
             val authors = networkAuthors.authors

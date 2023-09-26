@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="com.example.newbooksapp.feature.category.CategoryFragment"
+        android:name="com.example.newbooksapp.feature.category.category.CategoryFragment"
         android:label="fragment_category"
         tools:layout="@layout/fragment_category" >
         <action
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/categoryDetFragment"
-        android:name="com.example.newbooksapp.feature.category.CategoryDetFragment"
+        android:name="com.example.newbooksapp.feature.category.catgorybooks.CategoryDetFragment"
         android:label="fragment_category_det"
         tools:layout="@layout/fragment_category_det" >
         <argument
@@ -67,5 +67,8 @@
         <argument
             android:name="category_Name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_categoryDetFragment_to_booksDetFragment"
+            app:destination="@id/booksDetFragment" />
     </fragment>
 </navigation>

@@ -1,13 +1,16 @@
-package com.example.data.data.books.remote.model
+package com.example.data.data.category.categoryBooks.remote.model
 import com.google.gson.annotations.SerializedName
-data class BookModel(
+
+
+data class CategoryBookModel(
     val id: Int,
-    val formats: FormatsModel,
+    val formats: FormatsCatModel,
     val subjects: List<String>,
     val title: String,
-)
+
+    )
 {
-    data class FormatsModel (
+    data class FormatsCatModel (
         @SerializedName("image/jpeg")
         val imageJPEG: String,
     )

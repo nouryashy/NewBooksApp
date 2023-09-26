@@ -9,7 +9,6 @@ object FormatModelMapper {
             imageJPEG = entity.imageJPEG
         )
     }
-
     fun mapToEntity(domain: Book.Formats): BookModel.FormatsModel {
         return BookModel.FormatsModel(
             imageJPEG = domain.imageJPEG
