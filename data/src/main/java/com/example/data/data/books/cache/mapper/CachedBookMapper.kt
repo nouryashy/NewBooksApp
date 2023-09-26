@@ -6,7 +6,7 @@ import com.example.data.data.books.remote.model.BookModel
 
 object CachedBookMapper {
     fun mapFromCached(type: BookModel): CachedBook {
-        val formatModel = FormatCachedMapper.mapFromCached(type.formats)
+        val formatModel = CachedFormatMapper.mapFromCached(type.formats)
 
 
     return CachedBook(
@@ -18,7 +18,7 @@ object CachedBookMapper {
 }
 
 fun mapToCached(entity: CachedBook): BookModel {
-    val formatCashed = FormatCachedMapper.mapToCached(entity.formats)
+    val formatCashed = CachedFormatMapper.mapToCached(entity.formats)
     return BookModel(
         id = entity.id,
         formats = formatCashed,

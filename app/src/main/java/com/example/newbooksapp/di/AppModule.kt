@@ -8,6 +8,9 @@ import com.example.data.data.books.cache.db.AuthorsDatabase
 import com.example.data.data.books.cache.db.BooksDao
 import com.example.data.data.books.cache.db.BooksDatabase
 import com.example.data.data.books.remote.service.BooksServices
+import com.example.data.data.category.cache.db.CategoryBooksDao
+import com.example.data.data.category.cache.db.CategoryBooksDataBase
+import com.example.data.data.category.remote.service.CategoryServices
 import com.example.postsappdemo.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -51,7 +54,11 @@ object AppModule {
     fun provideAuthorApiService(retrofit: Retrofit): AuthorsServices {
         return retrofit.create(AuthorsServices::class.java)
     }
-
+    @Provides
+    @Singleton
+    fun provideCategoryBooksApiService(retrofit: Retrofit): CategoryServices {
+        return retrofit.create(CategoryServices::class.java)
+    }
 
 
 
@@ -73,6 +80,13 @@ object AppModule {
     }
 
 
+    @Provides
+    @Singleton
+    fun provideCategoryBookDatabase(app: Application): CategoryBooksDataBase {
+        return Room.databaseBuilder(app, CategoryBooksDataBase::class.java, "categories_database")
+            .allowMainThreadQueries()
+            .build()
+    }
 
     @Provides
     @Singleton
@@ -84,6 +98,12 @@ object AppModule {
     @Singleton
     fun provideAuthorDao(database: AuthorsDatabase): AuthorsDao {
         return database.authorDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCategoryBookDao(database: CategoryBooksDataBase): CategoryBooksDao {
+        return database.categoryBooksDao()
     }
 
 

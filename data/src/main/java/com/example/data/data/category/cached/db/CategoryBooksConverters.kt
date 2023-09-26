@@ -1,25 +1,23 @@
-package com.example.data.data.books.cache.db
+package com.example.data.data.category.cache.db
 
 import androidx.room.TypeConverter
 import com.example.data.data.books.cache.entity.CachedBook
+import com.example.data.data.category.cache.entity.CachedCategoryBook
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-
-class BookConverters {
-
+class CategoryBooksConverters {
     private val gson = Gson()
     @TypeConverter
-    fun fromFormats(formats: CachedBook.CachedFormats): String {
+    fun fromFormats(formats: CachedCategoryBook.CachedFormatsCat): String {
         return formats.imageJPEG
     }
 
     @TypeConverter
-    fun toFormats(image: String): CachedBook.CachedFormats {
-        return CachedBook.CachedFormats(image)
+    fun toFormats(image: String): CachedCategoryBook.CachedFormatsCat {
+        return CachedCategoryBook.CachedFormatsCat(image)
     }
-
-        @TypeConverter
+    @TypeConverter
     fun fromBookSubjectList(subject: List<String>): String {
         return gson.toJson(subject)
     }

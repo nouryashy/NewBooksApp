@@ -11,13 +11,13 @@ class BooksRepositoryImp(
     private val networkDataSource: BookNetworkDataSource,
     private val localDataSource: BookLocalDataSource,
     private val mapperRemote: BookResponseModelMapper,
-    private val mapperCached: CachedBookMapper,
+    private val mapperCached: CachedBookMapper
 ) : BooksRepository {
     override suspend fun getBooks(page: Int): List<Book> {
-        return fetchFromRemoteOrCache(page)
-    }
-
-    private suspend fun fetchFromRemoteOrCache(page: Int): List<Book> {
+//        return fetchFromRemoteOrCache(page)
+//    }
+//
+//    private suspend fun fetchFromRemoteOrCache(page: Int): List<Book> {
         return try {
             val networkBooks = networkDataSource.getBooksFromApi(page)
             val books = networkBooks.books

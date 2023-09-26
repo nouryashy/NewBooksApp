@@ -1,19 +1,17 @@
-package com.example.data.data.books.cache.entity
+package com.example.data.data.category.cache.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "books")
-data class CachedBook(
+@Entity(tableName = "categories")
+data class CachedCategoryBook(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val formats: CachedFormats,
+    val formats: CachedFormatsCat,
     val subjects: List<String>,
     val title: String,
-)
-{
-    data class CachedFormats (
+) {
+    data class CachedFormatsCat(
         val imageJPEG: String,
     )
-
 }
