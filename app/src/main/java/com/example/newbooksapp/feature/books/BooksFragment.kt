@@ -1,8 +1,5 @@
 package com.example.newbooksapp.feature.books
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.domain.feature.books.feature.books.model.Book
-import com.example.newbooksapp.R
 import com.example.newbooksapp.base.BaseAdapter
 import com.example.newbooksapp.databinding.BookItemListBinding
 import com.example.newbooksapp.databinding.FragmentBooksBinding

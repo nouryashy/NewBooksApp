@@ -1,13 +1,12 @@
 package com.example.data.bookss.books.repository
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import com.example.data.bookss.books.store.AuthorLocalDataSourse
 import com.example.data.bookss.books.store.AuthorNetworkDataSource
 import com.example.data.data.authors.remote.mapper.AuthorsResponseModelMapper
 import com.example.data.data.books.cache.mapper.CachedAuthorsMapper
 import com.example.domain.feature.books.books.model.Authors
 import com.example.domain.feature.books.books.repository.AuthorRepository
+import kotlinx.coroutines.flow.Flow
 
 
 class AuthorsRepositoryImp(
@@ -17,7 +16,8 @@ class AuthorsRepositoryImp(
     private val mapperCached: CachedAuthorsMapper,
 
     ) : AuthorRepository {
-    override suspend fun getAuthors(): List<Authors> {
+    override suspend fun getAuthors(): List<Authors>
+    {
         return try {
             val networkAuthors = networkDataSource.getAuthorsFromApi()
             val authors = networkAuthors.authors
@@ -29,8 +29,6 @@ class AuthorsRepositoryImp(
             return cashedAuthors.map { mapperRemote.mapFromEntity(it) }
         }
     }
-
-
 }
 
 

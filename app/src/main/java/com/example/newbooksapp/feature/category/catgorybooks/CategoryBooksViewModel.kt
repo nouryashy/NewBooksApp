@@ -1,7 +1,5 @@
 package com.example.newbooksapp.feature.category.catgorybooks
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.feature.books.feature.category.categorybooks.model.CategoryBook

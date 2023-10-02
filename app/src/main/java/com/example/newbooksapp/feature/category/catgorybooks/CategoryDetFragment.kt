@@ -1,7 +1,6 @@
 package com.example.newbooksapp.feature.category.catgorybooks
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -102,7 +101,6 @@ class CategoryDetFragment : Fragment() {
                             categoriesProgressBar.visibility = View.GONE
                         }
                     }
-
                     else -> {}
                 }
             }

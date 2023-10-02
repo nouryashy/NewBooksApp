@@ -39,7 +39,6 @@ class BooksDetFragment : Fragment() {
         fgDetBinding.bookDetTv.text = bookDet
         Glide.with(requireContext()).load(bookImage)
             .into(fgDetBinding.bookIv)
-
 }
 
 

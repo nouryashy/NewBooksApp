@@ -9,12 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.domain.feature.books.books.model.Authors
-import com.example.domain.feature.books.feature.books.model.Book
 import com.example.newbooksapp.base.BaseAdapter
 import com.example.newbooksapp.databinding.AuthorItemListBinding
-import com.example.newbooksapp.databinding.BookItemListBinding
 import com.example.newbooksapp.databinding.FragmentAuthorsBinding
 import com.example.postsappdemo.state.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,11 +56,11 @@ class AuthorsFragment : Fragment() {
             viewModel.authors.collect { result ->
                 when (result) {
                     is Resource.Success -> {
-                        val books = result.data
+                        val authors = result.data
                         fgBinding.apply {
                             authorProgressBar.visibility = View.GONE
                         }
-                        authorsAdapter.setItems(books)
+                        authorsAdapter.setItems(authors )
                     }
                     is Resource.Loading -> {
                         fgBinding.apply {

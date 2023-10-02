@@ -10,7 +10,6 @@ import com.example.postsappdemo.state.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import java.lang.Math.ceil
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,8 +31,6 @@ class BooksViewModel @Inject constructor(
             }
         }
     }
-
-
     fun loadNextPage() {
         currentPage++
         loadBooks()

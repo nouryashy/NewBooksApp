@@ -3,7 +3,6 @@ package com.example.newbooksapp.feature.auther
 import androidx.lifecycle.*
 import com.example.domain.feature.books.books.model.Authors
 import com.example.domain.feature.books.feature.authors.usecase.GetAuthors
-import com.example.domain.feature.books.feature.books.model.Book
 import com.example.postsappdemo.state.Resource
 
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,13 +24,13 @@ class AuthorsViewModel @Inject constructor(
             try {
                 val autherList = getAuthorsUseCase()
                 _authors.value = Resource.Success(autherList)
-
-                // Update the current page if there's a "next" value in the response
             } catch (e: Exception) {
                 _authors.value = Resource.Error(e)
             }
         }
     }
+
+
 
 
 }
